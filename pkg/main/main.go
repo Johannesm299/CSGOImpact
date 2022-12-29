@@ -9,6 +9,6 @@ import (
 
 func main() {
 	pwd, _ := os.Getwd()
-	filepath := filepath.Join(pwd, "..", "..", "match730_003403354556619293004_0695644917_191.dem")
+	filepath := filepath.Join(pwd, "..", "..", "cologne_2022", "m5-nuke.dem")
 	calc.CalculateImpact(filepath)
 }

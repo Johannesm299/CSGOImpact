@@ -36,15 +36,15 @@ func CalculateImpact(filepath string) {
 	var CurRound match.RoundImpact
 
 	p.RegisterEventHandler(func(e events.IsWarmupPeriodChanged) {
-		if e.NewIsWarmupPeriod == false {
+		if !e.NewIsWarmupPeriod {
 			fmt.Printf("\n\n ## Match Starting ## \n\n")
 			TeamTerrorists := p.GameState().TeamTerrorists().Members()
 			TeamCounterTerrorists := p.GameState().TeamCounterTerrorists().Members()
 
 			for i := 0; i < 5; i++ {
-				CurRound.Team1[i] = match.PlayerWrapper{TeamTerrorists[i], 0}
+				CurRound.Team1[i] = match.PlayerWrapper{Player: TeamTerrorists[i], Impact: 0}
 				fmt.Printf("Added Player %s to team1\n", TeamTerrorists[i])
-				CurRound.Team2[i] = match.PlayerWrapper{TeamCounterTerrorists[i], 0}
+				CurRound.Team2[i] = match.PlayerWrapper{Player: TeamCounterTerrorists[i], Impact: 0}
 				fmt.Printf("Added Player %s to team2\n", TeamCounterTerrorists[i])
 			}
 
@@ -118,6 +118,7 @@ func CalculateImpact(filepath string) {
 
 		CurMatch.Rounds = append(CurMatch.Rounds, CurRound)
 		CurRound.ResetImpact(-1)
+		CurRound.ResetKills()
 	})
 
 	// Parse to end
