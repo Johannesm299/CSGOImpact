@@ -30,6 +30,10 @@ func (r *RoundImpact) ResetImpact(team int) {
 	r.SumTeam2Impact = 0
 }
 
+func (r *RoundImpact) ResetKills() {
+	r.Kills = []KillImpact{}
+}
+
 func (r *RoundImpact) AddImpact(player *common.Player, impact float64) {
 	for i := range r.Team1 {
 		if r.Team1[i].Equals(player) {
