@@ -102,6 +102,8 @@ func CalculateImpact(filepath string) {
 				fmt.Printf("\t-> Impacts: %s : %.4f, %s : %.4f, %s : %.4f, %s : %.4f, %s : %.4f", CurRound.Team2[0].Player.Name, CurRound.Team2[0].Impact, CurRound.Team2[1].Player.Name, CurRound.Team2[1].Impact, CurRound.Team2[2].Player.Name, CurRound.Team2[2].Impact, CurRound.Team2[3].Player.Name, CurRound.Team2[3].Impact, CurRound.Team2[4].Player.Name, CurRound.Team2[4].Impact)
 				CurRound.ResetImpact(1)
 			}
+
+			CurMatch.Rounds = append(CurMatch.Rounds, CurRound)
 		case common.TeamCounterTerrorists:
 			fmt.Printf("Round finished: winnerSide=CT ; score=%d:%d\n\n", gs.TeamCounterTerrorists().Score()+1, gs.TeamTerrorists().Score())
 			if CurRound.Team1[0].Player.Team == 3 {
@@ -111,12 +113,13 @@ func CalculateImpact(filepath string) {
 				fmt.Printf("\t-> Impacts: %s : %.4f, %s : %.4f, %s : %.4f, %s : %.4f, %s : %.4f", CurRound.Team2[0].Player.Name, CurRound.Team2[0].Impact, CurRound.Team2[1].Player.Name, CurRound.Team2[1].Impact, CurRound.Team2[2].Player.Name, CurRound.Team2[2].Impact, CurRound.Team2[3].Player.Name, CurRound.Team2[3].Impact, CurRound.Team2[4].Player.Name, CurRound.Team2[4].Impact)
 				CurRound.ResetImpact(1)
 			}
+
+			CurMatch.Rounds = append(CurMatch.Rounds, CurRound)
 		default:
-			// Probably match medic or something similar
+			// If round is being reset
 			fmt.Printf("Round finished: No winner (tie)\n\n")
 		}
 
-		CurMatch.Rounds = append(CurMatch.Rounds, CurRound)
 		CurRound.ResetImpact(-1)
 		CurRound.ResetKills()
 	})
